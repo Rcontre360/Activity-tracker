@@ -1,9 +1,9 @@
 import React from "react";
-import {ChartContext} from "./chartManager";
+import {DataContext} from "./dataManager";
 import ChartConfig from "./chartData";
 
 const TasksChart = (props)=>{
-	let allData= React.useContext(ChartContext);
+	let allData= React.useContext(DataContext);
 
 	React.useEffect(()=>{
 		const cnx = document.getElementById("myChart");

@@ -7,35 +7,60 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import "./css/styles.css";
 
 import {Redirect} from "react-router-dom"
+import axios from "axios";
 
 import Navbar from "./components/navbar";
-import {ChartManager} from "./components/charts/chartManager";
+import {DataManager} from "./components/charts/dataManager";
 import {TaskManager} from "./components/tasks/taskManager";
+import UserManager from "./components/users/userManager";
 import HomePage from "./pages/home";
-
 
 class App extends React.Component{
 
 	state = {
-		startTime:Date.now(),
-		tasksData:new Map(),
-		userTasksArray:[],
-		numTasks:0
+		tasks:{
+			tasksData:new Map(),
+			userTasksArray:[],
+			numTasks:0,
+		},
+		user:{
+			isLoggedIn:"false",
+			name:undefined,
+			email:undefined,
+			initDate:undefined,
+		}
 	}
 
 	async setNewState(newState){
 		await this.setState({...newState});
 	}
 
+	async logout(){
+
+		const val = await axios({
+			method:"post",
+			url:"http://localhost:4000/user/logout",
+			data:this.state.user
+		});
+		this.setState({user:{
+			isLoggedIn:"false",
+			name:undefined,
+			email:undefined,
+			initDate:undefined,
+		}})
+	}
+
 	render(){
 
 		return(
 		<BrowserRouter>
+			
 			<Redirect to="/home"/>
-			<Navbar/>
+			<Navbar logout={this.logout.bind(this)} logged = {this.state.user.isLoggedIn}/>
 			<Route path="/home" component={HomePage}/>
-			<ChartManager {...this.state} />
-			<TaskManager {...this.state} setNewState={this.setNewState.bind(this)}/>
+			<DataManager {...this.state.tasks} />
+			<TaskManager {...this.state.tasks} setNewState={this.setNewState.bind(this)}/>
+			<UserManager setNewState={this.setNewState.bind(this)}/>
 		</BrowserRouter>
 		);
 	}

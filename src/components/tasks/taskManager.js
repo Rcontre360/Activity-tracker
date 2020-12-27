@@ -1,6 +1,9 @@
 import React from "react";
 import {Switch,Route} from "react-router-dom";
 
+import axios from "axios";
+axios.defaults.withCredentials = true;
+
 import AllTasks from "../../pages/allTasks";
 import NewTask from "../../pages/newTask";
 
@@ -19,7 +22,16 @@ class TaskManager extends React.Component{
 		this.props.setNewState(newState)
 	}
 
-	addNewTask(newTask){
+	async addNewTask(newTask){
+
+		const res = await axios({
+			method:"post",
+			url:"http://localhost:4000/task/create",
+			data:newTask
+		});
+		console.log(res)
+
+		/*
 		let newState = this.state;
 		newTask["id"] = newState.numTasks++;
 
@@ -34,7 +46,7 @@ class TaskManager extends React.Component{
 		newState.userTasksArray.push(newTask);
 
 		this.customSetState(newState);
-		console.log(newTask)
+		console.log(newTask)*/
 	}
 
 	deleteTask(id){

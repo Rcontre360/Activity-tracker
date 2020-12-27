@@ -20,41 +20,54 @@ const Sidebar = (props)=>{
     ]
 
 	return (
-	<nav id="sidebar"className="col-3">
 
-		<div>
-	        <h3 className="p-4 text-light">Your Statistics</h3>
-	    </div>
+    <div id="sidebarContainer">
+    <div className="row">
+    	<nav id="sidebar"className="col-9">
 
-        <ul className="navbar-nav m-4">
-            <li className="active">
-                <p href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
-                	All charts
-                </p>
-                <ul className="collapse" id="homeSubmenu">
-                    {chartItems.map((el,id)=>{
-                        return <ListItem {...el} key={id} className="text-white nav-link"/>
-                    })}
-                </ul>
-            </li>
+    		<div>
+    	        <h3 className="p-4 text-light">Your Statistics</h3>
+    	    </div>
 
-            <li className="active">
-                <p href="#timeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
-                    Set Time Lapse
-                </p>
-                <ul className="collapse" id="timeSubmenu">
-                    {timeItems.map((el,id)=>{
-                        return <ListItem {...el} key={id} className="text-white nav-link"/>
-                    })}
-                </ul>
-            </li>
+            <ul className="navbar-nav m-4">
+                <li className="active">
+                    <p href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
+                    	All charts
+                    </p>
+                    <ul className="collapse" id="homeSubmenu">
+                        {chartItems.map((el,id)=>{
+                            return <ListItem {...el} key={id} className="text-white nav-link"/>
+                        })}
+                    </ul>
+                </li>
 
-            <ListItem to="/about" className="text-white nav-link"
-            children="About"/>
- 
-        </ul>
+                <li className="active">
+                    <p href="#timeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
+                        Set Time Lapse
+                    </p>
+                    <ul className="collapse" id="timeSubmenu">
+                        {timeItems.map((el,id)=>{
+                            return <ListItem {...el} key={id} className="text-white nav-link"/>
+                        })}
+                    </ul>
+                </li>
 
-	</nav>
+                <ListItem to="/about" className="text-white nav-link"
+                children="About"/>
+     
+            </ul>
+
+    	</nav>
+        <div className="col-2 bg-light p-0 m-0 navbar-light">
+             <button className ="m-0 navbar-toggler" type="button" 
+                data-toggle="collapse" data-target="#sidebar" 
+                aria-controls="sidebar" aria-expanded="false" 
+                aria-label="Toggle navigation">
+                   <span className="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </div>
+    </div>
 	);
 }
 

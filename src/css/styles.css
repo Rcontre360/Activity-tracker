@@ -22,5 +22,8 @@
     background: #7386D5;
     color: #fff;
     transition: all 0.3s;
-    height: 85vh;
+    height: 100vh;
+}
+#sidebarContainer{
+    position: absolute;
 }

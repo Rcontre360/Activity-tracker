@@ -1,15 +1,20 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import ListItem from "./listItem";
 
-const Navbar = ()=>{
-
-  const navItems = [
+const navItems = [
     {to:"/home",children:"Home"},
-    {to:"/tasks",children:"Your Tasks"},
-    {to:"/newTask",children:"New Task"},
-    {to:"/statistics/line",children:"Statistics"},
-  ]
+    {to:"/tasks",children:"Your Tasks",logged:"true"},
+    {to:"/newTask",children:"New Task",logged:"true"},
+    {to:"/statistics/line",children:"Statistics",logged:"true"},
+    {to:"/register",children:"Register",logged:"false"},
+    {to:"/login",children:"Login",logged:"false"},
+    {to:"/home",children:"Logout",logged:"true"}
+]
+
+const Navbar = (props)=>{
+  const {logged,logout} = props;
+
+  navItems[6].onClick = logout; 
 
 	return (
 	<React.Fragment>
@@ -34,8 +39,11 @@ const Navbar = ()=>{
           id="navbarResponsive">
     				<ul className="navbar-nav ml-auto m-4">
                 {navItems.map((el,id)=>{
-                  return <ListItem {...el} key={id} className="text-white nav-link"/>
-                })}
+                  console.log(el.logged,logged)
+                  if (el.logged==undefined || el.logged==logged)
+                    return <ListItem {...el} key={id} className="text-white nav-link"/>
+                  })
+                }
       			</ul>
           </div>
         </div>
